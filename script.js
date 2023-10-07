@@ -44,7 +44,7 @@ function createCard(book) {
     }
 
     // Add card to the document.
-    document.querySelector("body").appendChild(card);
+    document.querySelector(".card-wrapper").appendChild(card);
 }
 
 

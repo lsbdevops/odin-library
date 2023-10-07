@@ -8,6 +8,29 @@
     <title>Odin Library</title>
 </head>
 <body>
-  
+    <dialog id="add-book-dialog" open>
+        <form action="">
+            <h2>Add a New Book</h2>
+            <ul>
+                <li><label for="title">Title: </label></li>
+                <li><input type="text" name="title" id="title"></li>
+                <li><label for="author">Author: </label></li>
+                <li><input type="text" name="author" id="author"></li>
+                <li><label for="pages">Number of Pages:</label></li>
+                <li><input type="number" name="pages" id="pages" min="0"></li>
+                <li><span>Book Read:</span></li>
+                <li class="form-radio">
+                    <input type="radio" name="read" id="read-yes" value="true">
+                    <label for="read-yes">Yes</label>
+                    <input type="radio" name="read" id="read-no" value="false">
+                    <label for="read-no">No</label>
+                </li>
+                <li class="form-button"><button value="add-book-cancel" formmethod="dialog">Cancel</button></li>
+                <li class="form-button"><button id="add-book-confirm" value="default">Confirm</button></li>
+            </ul>
+        </form>
+    </dialog>
+    <button id="add-book-button" type="button">Add a book</button>
+    <div class="card-wrapper"></div>
 </body>
 </html>
