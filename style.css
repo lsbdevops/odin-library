@@ -57,3 +57,7 @@ form > h2 {
     font-size: 2rem;
     text-align: center;
 }
+
+.error {
+    border: 2px solid red;
+}

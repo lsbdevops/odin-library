@@ -11,7 +11,10 @@ addBookBtn.addEventListener("click", () => {
 dialogConfirmBtn.addEventListener("click", (event) => {
     event.preventDefault();
     const book = addBookToLibrary();
-    createCard(book);
+    if(book) {
+        createCard(book);
+        clearAddBookForm();
+    }
 })
 
 // Book constructor.
@@ -25,13 +28,28 @@ function Book(title, author, numOfPages, isRead) {
 
 function addBookToLibrary() {
     // Get the user input from the form for each of the book properties.
-    const author = document.querySelector("#author").value;
-    const title = document.querySelector("#title").value;
-    const numOfPages = document.querySelector("#pages").value;
+    const titleElement = document.querySelector("#title");
+    const title = titleElement.value;
+    if (!title) {
+        titleElement.classList.add("error");
+        return false;
+    }
+    titleElement.classList.remove("error");
+
+    let author = document.querySelector("#author").value;
+    if (!author) {
+        author = "Unknown";
+    }
+
+    let numOfPages = document.querySelector("#pages").value;
+    if (!numOfPages) {
+        numOfPages = "Unknown";
+    }
+
     const isRead = document.querySelector("input[name='read']:checked").value;
 
     // Create a new book object with user input and add to library array.
-    const book = new Book(author, title, numOfPages, isRead);
+    const book = new Book(title, author, numOfPages, isRead);
     myLibrary.push(book);
 
     return book;
@@ -82,4 +100,12 @@ function displayLibrary(library) {
     library.forEach(book => {
         createCard(book);
     });
+}
+
+
+function clearAddBookForm() {
+    document.querySelector("#author").value = "";
+    document.querySelector("#title").value = "";
+    document.querySelector("#pages").value = "";
+    document.querySelector("#read-no").checked = true;
 }
