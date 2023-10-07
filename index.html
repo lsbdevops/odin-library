@@ -8,7 +8,7 @@
     <title>Odin Library</title>
 </head>
 <body>
-    <dialog id="add-book-dialog" open>
+    <dialog id="add-book-dialog">
         <form action="">
             <h2>Add a New Book</h2>
             <ul>
@@ -22,7 +22,7 @@
                 <li class="form-radio">
                     <input type="radio" name="read" id="read-yes" value="true">
                     <label for="read-yes">Yes</label>
-                    <input type="radio" name="read" id="read-no" value="false">
+                    <input type="radio" name="read" id="read-no" value="false" checked>
                     <label for="read-no">No</label>
                 </li>
                 <li class="form-button"><button value="add-book-cancel" formmethod="dialog">Cancel</button></li>

@@ -1,25 +1,40 @@
 const myLibrary = [];
 
+const addBookBtn = document.querySelector("#add-book-button");
+const addBookDialog = document.querySelector("#add-book-dialog");
+const dialogConfirmBtn = document.querySelector("#add-book-confirm");
+
+addBookBtn.addEventListener("click", () => {
+    addBookDialog.showModal();
+})
+
+dialogConfirmBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const book = addBookToLibrary();
+    createCard(book);
+})
 
 // Book constructor.
-function Book(author, title, numOfPages, isRead) {
-    this.author = author;
+function Book(title, author, numOfPages, isRead) {
     this.title = title;
+    this.author = author;
     this.numOfPages = numOfPages;
     this.isRead = isRead;
 }
 
 
 function addBookToLibrary() {
-    // Prompt user for input for each of the book properties.
-    const author = prompt("Author: ");
-    const title = prompt("Title: ");
-    const numOfPages = prompt("Number of Pages: ");
-    const isRead = prompt("Have you read this book? ");
+    // Get the user input from the form for each of the book properties.
+    const author = document.querySelector("#author").value;
+    const title = document.querySelector("#title").value;
+    const numOfPages = document.querySelector("#pages").value;
+    const isRead = document.querySelector("input[name='read']:checked").value;
 
-    // Create a new book object with user input and add to library array.[]
+    // Create a new book object with user input and add to library array.
     const book = new Book(author, title, numOfPages, isRead);
     myLibrary.push(book);
+
+    return book;
 }
 
 
