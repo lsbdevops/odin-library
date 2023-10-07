@@ -10,11 +10,29 @@
 body {
     margin: 0px;
     padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    justify-items: center;
+}
+
+header {
+    grid-column: 1 / span 2;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+.sidebar {
+    grid-column: 1;
 }
 
 .card-wrapper {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
 
@@ -26,14 +44,18 @@ body {
 
 .book-details {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.5fr 2fr;
     gap: 10px;
     text-align: right;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .book-details > span {
     text-align: left;
+    font-weight: normal;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 form > ul {

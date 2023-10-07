@@ -90,7 +90,7 @@ function getBookPropertyText(bookProperty) {
         case "numOfPages":
             return "Number of Pages:"
         case "isRead":
-            return "Read Status:"
+            return "Read:"
     }
 }
 
