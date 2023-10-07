@@ -1,5 +1,5 @@
 const myLibrary = [];
-const bookProperties = ["Author:", "Title:", "Number of Pages:", "Read Status:"]
+const bookProperties = ["author", "title", "numOfPages", "isRead"]
 
 // Book constructor.
 function Book(author, title, numOfPages, isRead) {
@@ -22,6 +22,7 @@ function addBookToLibrary() {
     myLibrary.push(book);
 }
 
+
 function createCard() {
     // Create card wrapper element.
     const card = document.createElement("div");
@@ -30,10 +31,11 @@ function createCard() {
     // Create elements for each book property.
     for(const property of bookProperties) {
         const spanEl = document.createElement("span");
+        spanEl.setAttribute("data-property", property);
 
         const divEl = document.createElement("div");
         divEl.classList.add("book-details");
-        divEl.textContent = property;
+        divEl.textContent = getBookPropertyText(property);
 
         divEl.appendChild(spanEl);
         card.appendChild(divEl);
@@ -41,4 +43,17 @@ function createCard() {
 
     // Add card to the document.
     document.querySelector("body").appendChild(card);
+}
+
+function getBookPropertyText(bookProperty) {
+    switch(bookProperty) {
+        case "author":
+            return "Author:";
+        case "title":
+            return "Title:";
+        case "numOfPages":
+            return "Number of Pages:"
+        case "isRead":
+            return "Read Status:"
+    }
 }
