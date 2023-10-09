@@ -4,10 +4,12 @@ const addBookBtn = document.querySelector("#add-book-button");
 const addBookDialog = document.querySelector("#add-book-dialog");
 const dialogConfirmBtn = document.querySelector("#add-book-confirm");
 
+// Open add a book form.
 addBookBtn.addEventListener("click", () => {
     addBookDialog.showModal();
 })
 
+// Create a book.
 dialogConfirmBtn.addEventListener("click", (event) => {
     event.preventDefault();
     const book = addBookToLibrary();
@@ -16,6 +18,7 @@ dialogConfirmBtn.addEventListener("click", (event) => {
         clearAddBookForm();
     }
 })
+
 
 // Book constructor.
 function Book(title, author, numOfPages, isRead) {
@@ -59,6 +62,7 @@ function addBookToLibrary() {
 function createCard(book) {
     // Create card wrapper element.
     const card = document.createElement("div");
+    card.setAttribute("data-id", myLibrary.length)
     card.classList.add("card");
 
     // Create elements for each book property.
@@ -75,6 +79,21 @@ function createCard(book) {
         divEl.appendChild(spanEl);
         card.appendChild(divEl);
     }
+
+    // Create a delete button.
+    const delBtn = document.createElement("button");
+    delBtn.setAttribute("type", "button");
+    delBtn.setAttribute("data-id", myLibrary.length)
+    delBtn.textContent = "Delete";
+    delBtn.classList.add("delete-button");
+
+    // Add delete event listener.
+    delBtn.addEventListener("click", () => {
+        deleteCard(delBtn) 
+    })
+
+    // Append button to card.
+    card.appendChild(delBtn);
 
     // Add card to the document.
     document.querySelector(".card-wrapper").appendChild(card);
@@ -96,9 +115,11 @@ function getBookPropertyText(bookProperty) {
 
 
 function displayLibrary(library) {
-    // Display any current books already present in the library array.
+    // Display any current books present in the library array.
     library.forEach(book => {
-        createCard(book);
+        if (book) {
+            createCard(book);
+        }
     });
 }
 
@@ -108,4 +129,16 @@ function clearAddBookForm() {
     document.querySelector("#title").value = "";
     document.querySelector("#pages").value = "";
     document.querySelector("#read-no").checked = true;
+}
+
+
+// Delete the book from library array and the associated card.
+function deleteCard(btn) {
+    // Remove book from array. 
+    const bookArrayIndex = parseInt(btn.dataset.id) - 1;
+    delete myLibrary[bookArrayIndex];
+
+    // Delete card from the webpage.
+    const cardToDelete = document.querySelector(`.card[data-id="${btn.dataset.id}"]`);
+    cardToDelete.remove();
 }

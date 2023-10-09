@@ -50,7 +50,7 @@ h2 {
     align-items: center;
 }
 
-.sidebar > button {
+.sidebar > button, .delete-button {
     border-radius: 10px;
     color: white;
     background-color: #0284c7;
@@ -59,12 +59,12 @@ h2 {
     padding: 10px 15px;
 }
 
-.sidebar > button:hover {
+.sidebar > button:hover, .delete-button:hover {
     cursor: pointer;
     outline: 2px solid #cbd5e1;
 }
 
-.sidebar > button:active {
+.sidebar > button:active, .delete-button:active {
     background-color: #4b5563;
 }
 
@@ -97,8 +97,12 @@ h2 {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     height: 200px;
     padding: 20px;
+    text-align: center;
     border: 1px solid #0ea5e9;
     border-radius: 10px;
     background-color: #bae6fd;
