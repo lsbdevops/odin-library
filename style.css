@@ -68,6 +68,22 @@ h2 {
     background-color: #4b5563;
 }
 
+.sidebar > button::before {
+    content: "";
+    background-image: url(./plus-box.svg);
+    filter: invert(15%) sepia(18%) saturate(2394%) hue-rotate(164deg) brightness(102%) contrast(99%);
+    background-size: 25px 25px;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.sidebar > button:hover::before
+{
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+}
+
 .card-wrapper {
     background-color: #e0f2fe;
     height: 100%;
