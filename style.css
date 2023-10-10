@@ -50,7 +50,7 @@ h2 {
     align-items: center;
 }
 
-.sidebar > button, .delete-button {
+button {
     border-radius: 10px;
     color: white;
     background-color: #0284c7;
@@ -59,12 +59,12 @@ h2 {
     padding: 10px 15px;
 }
 
-.sidebar > button:hover, .delete-button:hover {
+button:hover {
     cursor: pointer;
     outline: 2px solid #cbd5e1;
 }
 
-.sidebar > button:active, .delete-button:active {
+button:active {
     background-color: #4b5563;
 }
 
@@ -100,7 +100,7 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    height: 200px;
+    height: min-content;
     padding: 20px;
     text-align: center;
     border: 1px solid #0ea5e9;
@@ -123,6 +123,17 @@ h2 {
     font-weight: normal;
     word-wrap: break-word;
     word-break: break-all;
+}
+
+.book-details > button {
+    grid-column: 1 / span 2;
+    width: 50%;
+    justify-self: center;
+    background-color: red;
+}
+
+.book-details > .read {
+    background-color: green;
 }
 
 form > ul {

@@ -76,7 +76,33 @@ function createCard(book) {
         divEl.classList.add("book-details");
         divEl.textContent = getBookPropertyText(property);
 
-        divEl.appendChild(spanEl);
+        // Create a button for read status.
+        if (property === "isRead") {
+            const readBtn = document.createElement("button");
+            readBtn.setAttribute("type", "button");
+            if (value === "Read") {
+                readBtn.classList.add("read");
+            }
+            readBtn.setAttribute("data-id", myLibrary.length)
+
+            // Add event listen to change read status.
+            readBtn.addEventListener("click", () => {
+                // Update array with new read status.
+                const bookArrayIndex = parseInt(readBtn.dataset.id) - 1;
+                myLibrary[bookArrayIndex].isRead = getChangedReadStatus(readBtn)
+
+                // Change the button display.
+                readBtn.classList.toggle("read");
+                readBtn.textContent = getChangedReadStatus(readBtn)
+            })
+
+            readBtn.appendChild(spanEl);
+            divEl.appendChild(readBtn);
+        }
+        else {
+            divEl.appendChild(spanEl);
+        }
+
         card.appendChild(divEl);
     }
 
@@ -108,8 +134,6 @@ function getBookPropertyText(bookProperty) {
             return "Title:";
         case "numOfPages":
             return "Total Pages:"
-        case "isRead":
-            return "Read:"
     }
 }
 
@@ -141,4 +165,9 @@ function deleteCard(btn) {
     // Delete card from the webpage.
     const cardToDelete = document.querySelector(`.card[data-id="${btn.dataset.id}"]`);
     cardToDelete.remove();
+}
+
+function getChangedReadStatus(element) {
+    return (element.textContent === "Read") ? 
+    "Not Read" : "Read";
 }
