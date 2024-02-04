@@ -167,6 +167,7 @@ const formController = function() {
                 clearAddBookForm();
                 event.preventDefault();
             }
+            
         })
 
         // Close dialog if cancel button is clicked.
@@ -176,6 +177,9 @@ const formController = function() {
             clearAddBookForm();
             addBookDialog.close();
         })
+
+        const inputElements = Array.from(document.querySelectorAll('input'));
+        inputElements.forEach((element) => element.addEventListener('input', () => bookValidator().validate()));
     }
 
     const createBook = () => {
@@ -183,11 +187,6 @@ const formController = function() {
         // Get the user input from the form for each of the book properties.
         const titleElement = document.querySelector("#title");
         const title = titleElement.value;
-        if (!title) {
-            titleElement.classList.add("error");
-            return false;
-        }
-        titleElement.classList.remove("error");
 
         const author = document.querySelector("#author").value;
         const numOfPages = document.querySelector("#pages").value;
