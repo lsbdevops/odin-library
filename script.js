@@ -156,21 +156,30 @@ const formController = function() {
         const addBookBtn = document.querySelector("#add-book-button");
         const addBookDialog = document.querySelector("#add-book-dialog");
         addBookBtn.addEventListener("click", () => {
-        addBookDialog.showModal();
+            addBookDialog.showModal();
         })
 
         // Submit user input to create book.
         const dialogConfirmBtn = document.querySelector("#add-book-confirm");
         dialogConfirmBtn.addEventListener("click", (event) => {
-        event.preventDefault();
-        const bookCreated = createBook();
-        if(bookCreated) {
+            const bookCreated = createBook();
+            if(bookCreated) {
+                clearAddBookForm();
+                event.preventDefault();
+            }
+        })
+
+        // Close dialog if cancel button is clicked.
+        const dialogCancelBtn = document.querySelector("#add-book-cancel");
+        dialogCancelBtn.addEventListener("click", (event) => {
+            event.preventDefault();
             clearAddBookForm();
-        }
+            addBookDialog.close();
         })
     }
 
     const createBook = () => {
+        bookValidator();
         // Get the user input from the form for each of the book properties.
         const titleElement = document.querySelector("#title");
         const title = titleElement.value;
@@ -199,6 +208,17 @@ const formController = function() {
 
     return {addBookForm}
 }()
+
+function bookValidator() {
+    const titleInput = document.querySelector('#title');
+
+    if (titleInput.validity.valueMissing) {
+        titleInput.setCustomValidity('Book title cannot be blank.');
+    } else {
+        titleInput.setCustomValidity('');
+    }
+
+}
 
 const myLibrary = new Library();
 formController.addBookForm();
