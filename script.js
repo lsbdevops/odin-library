@@ -179,7 +179,7 @@ const formController = function() {
     }
 
     const createBook = () => {
-        bookValidator();
+        if (!bookValidator().validate()) return false;
         // Get the user input from the form for each of the book properties.
         const titleElement = document.querySelector("#title");
         const title = titleElement.value;
@@ -210,14 +210,40 @@ const formController = function() {
 }()
 
 function bookValidator() {
-    const titleInput = document.querySelector('#title');
-
-    if (titleInput.validity.valueMissing) {
-        titleInput.setCustomValidity('Book title cannot be blank.');
-    } else {
-        titleInput.setCustomValidity('');
+    const validate = () => {
+        return validateTitle() && validateAuthor();
     }
 
+    const validateTitle = () => {
+        const titleInput = document.querySelector('#title');
+
+        if (titleInput.validity.valueMissing) {
+            titleInput.setCustomValidity('Book title cannot be blank.');
+            return false;
+        }
+
+        titleInput.setCustomValidity('');
+        return true;
+    }
+
+    const validateAuthor = () => {
+        const authorInput = document.querySelector('#author');
+        console.log(authorInput)
+
+        if (authorInput.validity.valueMissing) {
+            authorInput.setCustomValidity('Book author cannot be blank.');
+            return false;
+        }
+        if (authorInput.validity.patternMismatch) {
+            authorInput.setCustomValidity('Book author must be letters only.');
+            return false;
+        }
+
+        authorInput.setCustomValidity('');
+        return true;
+    }
+        
+    return {validate}
 }
 
 const myLibrary = new Library();
